@@ -1,0 +1,9 @@
+# Minimal: single rule, low budget, no correlation.
+engine:
+  mode: low
+detect:
+  rules: [sqli]
+analyze:
+  correlate: false
+report:
+  format: json

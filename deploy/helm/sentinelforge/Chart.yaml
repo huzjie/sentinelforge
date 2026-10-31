@@ -1,0 +1,6 @@
+apiVersion: v2
+name: sentinelforge
+description: Sovereign autonomous cyber-defense engine
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

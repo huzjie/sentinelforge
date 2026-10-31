@@ -1,0 +1,11 @@
+# Fast CI triage: low mode, high-signal rules only.
+engine:
+  mode: low
+  token_budget: 1024
+detect:
+  rules: [sqli, cmdi, secrets, deserialization]
+  include_cve: false
+  include_ioc: false
+report:
+  format: sarif
+  out_dir: reports

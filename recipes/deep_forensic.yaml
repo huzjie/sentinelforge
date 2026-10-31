@@ -1,0 +1,13 @@
+# Deep forensic audit: high mode, full surface, JSON export.
+engine:
+  mode: high
+  token_budget: 8192
+detect:
+  rules: [sqli, xss, cmdi, secrets, pathtraversal, weakcrypto, ssrf, deserialization, openredirect]
+  include_cve: true
+  include_ioc: true
+analyze:
+  correlate: true
+report:
+  format: json
+  out_dir: reports

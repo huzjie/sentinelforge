@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sentinelforge.fullname" . }}
+  labels:
+    app: sentinelforge
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: sentinelforge
+  template:
+    metadata:
+      labels:
+        app: sentinelforge
+    spec:
+      securityContext: {{ toYaml .Values.securityContext | nindent 8 }}
+      containers:
+        - name: sentinelforge
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["serve", "--port", "8420"]
+          ports:
+            - containerPort: 8420
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]

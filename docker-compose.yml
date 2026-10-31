@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  sentinelforge:
+    build: .
+    image: sentinelforge:latest
+    read_only: true
+    tmpfs:
+      - /tmp
+    volumes:
+      - ./examples:/scan:ro
+      - ./reports:/data/reports
+    # scan the mounted examples directory
+    command: ["scan", "/scan"]

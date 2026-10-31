@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinelforge"
+version = "0.1.0"
+description = "Sovereign autonomous cyber-defense engine (Mistral Large 4 / 'Le Chonk' style): a zero-dependency reference implementation that scans code & infrastructure for threats, triages severity with confidence, correlates findings into attack chains, and generates remediation -- with three reasoning modes (low/medium/high), a token budget, and fully offline / data-residency guarantees. Pure Python, no numpy/torch/requests."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "sentinelforge contributors" }]
+keywords = ["cybersecurity", "security", "vulnerability-scanner", "threat-detection", "cve", "ioc", "static-analysis", "sast", "remediation", "sovereign-ai", "zero-dependency", "python"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Security",
+]
+
+[project.scripts]
+sentinelforge = "sentinelforge.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sentinelforge*"]

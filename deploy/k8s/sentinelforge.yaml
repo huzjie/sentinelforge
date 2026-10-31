@@ -1,0 +1,48 @@
+# Minimal single-replica Deployment + Service.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentinelforge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentinelforge
+  template:
+    metadata:
+      labels:
+        app: sentinelforge
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        readOnlyRootFilesystem: true
+      containers:
+        - name: sentinelforge
+          image: sentinelforge:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8420
+          args: ["serve", "--port", "8420"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentinelforge
+spec:
+  selector:
+    app: sentinelforge
+  ports:
+    - port: 8420
+      targetPort: 8420
+  type: ClusterIP

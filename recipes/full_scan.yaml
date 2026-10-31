@@ -1,0 +1,11 @@
+# Full scan: standard mode, all rules, markdown report.
+engine:
+  mode: medium
+  token_budget: 4096
+detect:
+  rules: [sqli, xss, cmdi, secrets, pathtraversal, weakcrypto, ssrf, deserialization, openredirect]
+  include_cve: true
+  include_ioc: true
+report:
+  format: markdown
+  out_dir: reports
